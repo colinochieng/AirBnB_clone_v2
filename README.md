@@ -3,6 +3,31 @@
 This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
 ---
+## Background Context
+Environment variables will be your best friend for this project!
+- `HBNB_ENV`: running environment. It can be “dev” or “test” for the moment (“production” soon!)
+- `HBNB_MYSQL_USER`: the username of your MySQL
+- `HBNB_MYSQL_PWD`: the password of your MySQL
+- `HBNB_MYSQL_HOST`: the hostname of your MySQL
+- `HBNB_MYSQL_DB`: the database name of your MySQL
+- `HBNB_TYPE_STORAGE`: the type of storage used. It can be “file” (using FileStorage) or db (using DBStorage)
+## Resources
+### Read or watch:
+- [cmd module](https://docs.python.org/3/library/cmd.html)
+- [unittest module](https://docs.python.org/3/library/unittest.html#module-unittest)
+- [args/kwargs](https://yasoob.me/2013/08/04/args-and-kwargs-in-python-explained/)
+- [SQLAlchemy tutorial](https://docs.sqlalchemy.org/en/13/orm/tutorial.html)
+- [How To Create a New User and Grant Permissions in MySQL](https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql)
+- [Python3 and environment variables](https://docs.python.org/3/library/os.html?highlight=env#os.getenv)
+- [SQLAlchemy](https://docs.sqlalchemy.org/en/13/)
+- [MySQL 8.0 SQL Statement Syntax](https://dev.mysql.com/doc/refman/8.0/en/sql-statements.html)
+
+All your unittests must pass without any errors at anytime in this project, with each storage engine!. Same for PEP8!
+```
+root@2d5eef9b1dda:~/AirBnB_clone_v2# HBNB_ENV=test HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL_PWD=hbnb_test_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db python3 -m unittest discover tests 2>&1 /dev/null | tail -n 1
+OK
+root@2d5eef9b1dda:~/AirBnB_clone_v2# 
+```
 
 <center><h3>Repository Contents by Project Task</h3> </center>
 
@@ -35,7 +60,7 @@ This repository contains the initial stage of a student project to build a clone
 ```
 5. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
 
-##### Commands
+#### Commands
     * create - Creates an instance based on given class
 
     * destroy - Destroys an object based on class and UUID
