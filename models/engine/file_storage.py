@@ -16,7 +16,9 @@ class FileStorage:
             for key, value in self.__objects.items():
                 if isinstance(value, cls):
                     li_cls.update({key: value})
-
+        else:
+            for key, value in self.__objects.items():
+                li_cls.update({key: value})
         return li_cls
 
     def new(self, obj):
