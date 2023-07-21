@@ -6,6 +6,7 @@ from console import HBNBCommand
 import unittest
 from models.engine.file_storage import FileStorage
 import os
+from models.state import State
 
 
 class TestHBNBCommand(unittest.TestCase):
@@ -30,9 +31,9 @@ class TestHBNBCommand(unittest.TestCase):
     @unittest.skipIf(os.environ['HBNB_TYPE_STORAGE'] == 'db', "For Json file")
     def test_create(self):
         """Test create from console"""
-        length = len(self.storage.all())
+        length = len(self.storage.all(State))
         self.console.onecmd('create State name="California"')
-        self.assertGreater(len(self.storage.all()), length)
+        self.assertGreater(len(self.storage.all(State)), length)
 
 
 if __name__ == "__main__":
