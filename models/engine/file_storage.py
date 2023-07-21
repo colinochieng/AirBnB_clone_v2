@@ -16,10 +16,7 @@ class FileStorage:
             for key, value in self.__objects.items():
                 if isinstance(value, cls):
                     li_cls.update({key: value})
-        if li_cls:
-            print("I am in")
-        else:
-            print('***************It seems I am empty*********************')
+
         return li_cls
 
     def new(self, obj):
