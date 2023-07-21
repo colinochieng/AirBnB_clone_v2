@@ -137,6 +137,8 @@ class HBNBCommand(cmd.Cmd):
             key, value = tuple(i.split("="))
             if '"' in value:
                 value = value.replace('"', '')
+                if '_' in value:
+                    value = value.replace('_', ' ')
             elif '.' in value:
                 value = float(value)
             else:
