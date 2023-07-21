@@ -17,6 +17,7 @@ from models.review import Review
 classes = {'User': User, 'Place': Place, 'State': State,
            'City': City, 'Amenity': Amenity, 'Review': Review}
 
+
 class DBStorage:
     """
     Database storage
@@ -32,10 +33,10 @@ class DBStorage:
             .format(getenv("HBNB_MYSQL_USER"), getenv("HBNB_MYSQL_PWD"),
                     getenv("HBNB_MYSQL_HOST"), getenv("HBNB_MYSQL_DB"))
         self.__engine = create_engine(url, pool_pre_ping=True)
-        
+
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
-    
+
     def all(self, cls=None):
         """
         query on the current database session
@@ -52,7 +53,7 @@ class DBStorage:
                     key = obj.id
                     archive.update({key: obj})
         return archive
-    
+
     def reload(self):
         """
         create all tables in the database
@@ -62,19 +63,19 @@ class DBStorage:
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Scoped = scoped_session(Session)
         self.__session = Scoped()
-    
+
     def new(self, obj):
         """
         add the object to the current database session
         """
         self.__session.add(obj)
-    
+
     def save(self):
         """
         commit all changes of the current database session
         """
         self.__session.commit()
-    
+
     def delete(self, obj=None):
         """
         delete from the current database session obj if not None

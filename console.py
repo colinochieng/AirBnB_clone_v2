@@ -150,7 +150,7 @@ class HBNBCommand(cmd.Cmd):
         for key, value in dic.items():
             setattr(new_instance, key, value)
         print(new_instance.id)
-        storage.save()
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -225,6 +225,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
+        from os import environ
         print_list = []
 
         if args:
@@ -232,12 +233,19 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
+        if environ['HBNB_TYPE_STORAGE'] == 'file':
+            if args:
+                for k, v in storage._FileStorage__objects.items():
+                    if k.split('.')[0] == args:
+                        print_list.append(v)
+            else:
+                for k, v in storage._FileStorage__objects.items():
                     print_list.append(v)
-        else:
-            for k, v in storage._FileStorage__objects.items():
-                print_list.append(v)
+        elif environ['HBNB_TYPE_STORAGE'] == 'db':
+            if args:
+                print_list = [val for val in storage.all(eval(args)).values()]
+            else:
+                print_list = [value for value in storage.all().values()]
         print(print_list)
 
     def help_all(self):
