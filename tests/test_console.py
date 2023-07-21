@@ -33,7 +33,6 @@ class TestHBNBCommand(unittest.TestCase):
         length = len(self.storage.all())
         self.console.onecmd('create State name="California"')
         self.assertGreater(len(self.storage.all()), length)
-        
 
 
 if __name__ == "__main__":
