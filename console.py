@@ -145,10 +145,8 @@ class HBNBCommand(cmd.Cmd):
                 value = int(value)
             dic.update({key: value})
 
-        new_instance = HBNBCommand.classes[args[0]]()
+        new_instance = HBNBCommand.classes[args[0]](**dic)
 
-        for key, value in dic.items():
-            setattr(new_instance, key, value)
         print(new_instance.id)
         new_instance.save()
 

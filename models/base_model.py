@@ -23,7 +23,7 @@ class BaseModel:
             self.updated_at = datetime.now()
         else:
             for key, value in kwargs.items:
-                if not hasattr(self, key):
+                if hasattr(self, key) is True:
                     setattr(self, key, value)
 
     def __str__(self):
