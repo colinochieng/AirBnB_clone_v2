@@ -9,12 +9,13 @@ import os
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
 
     if os.environ.get("HBNB_TYPE_STORAGE") == 'db':
-        cas_str = 'all, delete-orphan'
+        name = Column(String(128), nullable=False)
+        cas_str = 'all, delete, delete-orphan'
         cities = relationship('City', backref='state', cascade=cas_str)
-    elif os.environ.get("HBNB_TYPE_STORAGE") == 'file':
+    else:
+        name = ""
         @property
         def cities(self):
             """
