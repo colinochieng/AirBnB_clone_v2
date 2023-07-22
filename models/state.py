@@ -16,6 +16,7 @@ class State(BaseModel, Base):
         cities = relationship('City', backref='state', cascade=cas_str)
     else:
         name = ""
+
         @property
         def cities(self):
             """
