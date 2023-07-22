@@ -1,0 +1,23 @@
+{
+    "State.860a4be2-83b1-4fcf-ab6d-f29e76f0f0fa": {
+        "id": "860a4be2-83b1-4fcf-ab6d-f29e76f0f0fa",
+        "created_at": "2023-07-22T11:53:21.080850",
+        "updated_at": "2023-07-22T11:53:21.081848",
+        "name": "Kenya",
+        "__class__": "State"
+    },
+    "State.36dc8a97-443a-4376-a8ad-d4837ecdcd42": {
+        "id": "36dc8a97-443a-4376-a8ad-d4837ecdcd42",
+        "created_at": "2023-07-22T11:58:49.864297",
+        "updated_at": "2023-07-22T11:58:49.864297",
+        "name": "Ug",
+        "__class__": "State"
+    },
+    "State.99bb9ade-a381-4028-91a3-db3f39209153": {
+        "id": "99bb9ade-a381-4028-91a3-db3f39209153",
+        "created_at": "2023-07-22T11:58:56.414197",
+        "updated_at": "2023-07-22T11:58:56.414197",
+        "name": "Ug",
+        "__class__": "State"
+    }
+}
