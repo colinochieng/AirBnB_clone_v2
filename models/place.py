@@ -1,10 +1,16 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey, Integer, Float
+from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from sqlalchemy.orm import relationship
 from os import environ
 
+
+place_amenity = Table(
+    'place_amenity',
+    Base.metadata,
+    Column('place_id', String(60), ForeignKey('places.id'), primary_key=True),
+    Column('amenity_id', String(60), ForeignKey('amenities.id'), primary_key=True))
 
 class Place(BaseModel, Base):
     """ A place to stay """
@@ -22,6 +28,7 @@ class Place(BaseModel, Base):
         longitude = Column(Float, nullable=True)
         cas_str = 'all, delete, delete-orphan'
         reviews = relationship('Review', backref='place', cascade=cas_str)
+        amenities = relationship('Amenity', secondary=place_amenity, viewonly=False, backref='place_amenities')
     else:
         city_id = ""
         user_id = ""
@@ -45,3 +52,18 @@ class Place(BaseModel, Base):
             from models.review import Review
             query = storage.all(Review).values()
             return [review for review in query if review.place_id == self.id]
+        
+        @property
+        def amenities(self):
+            from models import storage
+            from models.amenity import Amenity
+            query = storage.all(Amenity).values()
+            return [amenity for amenity in query if amenity.id in self.amenity_ids]
+        
+        @amenities.setter
+        def amenities(self, value):
+            from models import storage
+            from models.amenity import Amenity
+            if isinstance(value, Amenity):
+                if value.id not in self.amenity_ids:
+                    self.amenity_ids.append(value.id)
