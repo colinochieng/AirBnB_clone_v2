@@ -159,6 +159,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, args):
         """ Method to show an individual object """
+        from os import environ
         new = args.partition(" ")
         c_name = new[0]
         c_id = new[2]
@@ -180,10 +181,18 @@ class HBNBCommand(cmd.Cmd):
             return
 
         key = c_name + "." + c_id
-        try:
-            print(storage._FileStorage__objects[key])
-        except KeyError:
-            print("** no instance found **")
+
+        if environ['HBNB_TYPE_STORAGE'] == 'db':
+            obj = storage.all(eval(c_name))
+            if c_id in obj.keys():
+                print(obj[c_id])
+            else:
+                print("** no instance found **")
+        else:
+            try:
+                print(storage._FileStorage__objects[key])
+            except KeyError:
+                print("** no instance found **")
 
     def help_show(self):
         """ Help information for the show command """
