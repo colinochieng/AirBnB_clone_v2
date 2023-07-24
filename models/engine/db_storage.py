@@ -45,12 +45,12 @@ class DBStorage:
         archive = {}
         if cls:
             for obj in self.__session.query(cls).all():
-                key = obj.id
+                key = f'{obj.__class__.__name__}.{obj.id}'
                 archive.update({key: obj})
         else:
             for value in classes.values():
                 for obj in self.__session.query(value).all():
-                    key = obj.id
+                    key = f'{obj.__class__.__name__}.{obj.id}'
                     archive.update({key: obj})
         return archive
 
