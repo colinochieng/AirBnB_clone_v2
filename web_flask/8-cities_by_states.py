@@ -15,7 +15,8 @@ app.url_map.strict_slashes = False
 
 def state_cities(query, state):
     """Return list of cities based on state"""
-    return [[city.id, city.name] for city in query if city.state_id == state.id]
+    
+    return [[cit.id, cit.name] for cit in query if cit.state_id == state.id]
 
 
 if os.environ.get("HBNB_TYPE_STORAGE") == 'db':
@@ -37,20 +38,34 @@ def states():
     from models.state import State
     from models.city import City
 
-    dictionary = storage.all(State)
-    list_states = []
-    cities = []
-    query = storage.all(City).values()
-    i = 0
-    for value in dictionary.values():
-        cities = state_cities(query, value)
-        cities.sort(key=lambda city: city[1])
-        list_states.append([value.id, value.name, cities])
-    sorted_states = sorted(list_states, key=lambda state: state[1])
-
-    print(sorted_states[:2])
-    return render_template('8-cities_by_states.html', states_list=sorted_states)
+    """
+    sorted states
+    """
+    sorted_stas = []
+    if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
+        print(os.environ.get('HBNB_TYPE_STORAGE') )
+        dictionary = storage.all(State)
+        list_states = []
+        cities = []
+        query = storage.all(City).values()
+        for value in dictionary.values():
+            cities = state_cities(query, value)
+            cities.sort(key=lambda city: city[1])
+            list_states.append([value.id, value.name, cities])
+        sorted_stas = sorted(list_states, key=lambda state: state[1])
+    else:
+        dictionary = storage.all(State)
+        list_states = []
+        cities = []
+        for value in dictionary.values():
+            cities_list = value.city()
+            for city in cities_list:
+                cities.append[[city.id, city.name]]
+                cities.sort(key=lambda city: city[1])
+            list_states.append([value.id, value.name, cities])
+        sorted_stas = sorted(list_states, key=lambda state: state[1])
+    return render_template('8-cities_by_states.html', states_list=sorted_stas)
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
