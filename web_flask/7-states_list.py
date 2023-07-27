@@ -3,7 +3,6 @@
 script that starts a Flask web application:
 - the web application listen on 0.0.0.0, port 5000
 - Routes: /states_list: display a HTML page: (inside the tag BODY)
-- 
 """
 from flask import Flask, render_template
 from models import storage
