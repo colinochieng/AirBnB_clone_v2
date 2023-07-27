@@ -15,11 +15,12 @@ app.url_map.strict_slashes = False
 
 if os.environ.get("HBNB_TYPE_STORAGE") == 'db':
     @app.teardown_appcontext
-    def session_closure():
+    def session_closure(error):
         """
         remove the current SQLAlchemy Session
         """
-        storage.close()
+        if storage is not None:
+            storage.close()
 
 
 @app.route('/states_list')
@@ -32,11 +33,12 @@ def states():
     dictionary = storage.all(State)
     list_states = []
 
-    for values in dictionary.values:
+    for values in dictionary.values():
         list_states.append([values.id, values.name])
     sorted_states = sorted(list_states, key=lambda state: state[1])
+    print(sorted_states)
     return render_template('7-states_list.html', states_list=sorted_states)
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=500)
+    app.run(host='0.0.0.0', port=5000)
