@@ -14,8 +14,7 @@ app.url_map.strict_slashes = False
 
 
 def state_cities(query, state):
-    """Return list of cities based on state"""
-    
+    """Return list of cities based on state""" 
     return [[cit.id, cit.name] for cit in query if cit.state_id == state.id]
 
 
@@ -29,7 +28,7 @@ if os.environ.get("HBNB_TYPE_STORAGE") == 'db':
             storage.close()
 
 
-@app.route('/states_list')
+@app.route('/cities_by_states')
 def states():
     """
     display a HTML page for states
@@ -43,7 +42,6 @@ def states():
     """
     sorted_stas = []
     if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
-        print(os.environ.get('HBNB_TYPE_STORAGE') )
         dictionary = storage.all(State)
         list_states = []
         cities = []
