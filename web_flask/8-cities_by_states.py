@@ -14,7 +14,7 @@ app.url_map.strict_slashes = False
 
 
 def state_cities(query, state):
-    """Return list of cities based on state""" 
+    """Return list of cities based on state"""
     return [[cit.id, cit.name] for cit in query if cit.state_id == state.id]
 
 
