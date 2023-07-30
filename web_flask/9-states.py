@@ -2,7 +2,8 @@
 """
 script that starts a Flask web application:
 - The web application is listening on 0.0.0.0, port 5000
-- Uses storage for fetching data from the storage engine (FileStorage or DBStorage)
+- Uses storage for fetching data from the storage engine
+ + (FileStorage or DBStorage)
 - Routes:
 - /states: display a HTML page: (inside the tag BODY)
 - /states/<id>: display a HTML page: (inside the tag BODY)
@@ -31,7 +32,7 @@ def state_with_id(id):
     state = storage.all(State).get(f'State.{id}')
 
     if not state:
-        return render_template('9-states.html', not_found='Not found!')  
+        return render_template('9-states.html', not_found='Not found!')
 
     if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
         cities = state.cities
