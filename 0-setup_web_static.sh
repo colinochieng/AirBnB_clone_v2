@@ -29,7 +29,7 @@ if ! [ -d '/data/web_static/releases/test/' ]; then
 fi
 
 echo '<html><body><h1>HBNB TESTING</h1></body></html>' | sudo tee /data/web_static/releases/test/index.html > /dev/null
-ln -s /data/web_static/releases/test/ /data/web_static/current
+sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 sudo chown -hR ubuntu:ubuntu /data/
 
 
