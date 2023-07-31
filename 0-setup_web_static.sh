@@ -9,23 +9,23 @@ if ! command -v nginx &>/dev/null; then
 fi
 
 if ! [ -d '/data/' ]; then
-    mkdir /data/
+    sudo mkdir /data/
 fi
 
 if ! [ -d '/data/web_static/' ]; then
-    mkdir /data/web_static/
+    sudo mkdir /data/web_static/
 fi
 
 if ! [ -d '/data/web_static/releases/' ]; then
-    mkdir /data/web_static/releases/
+    sudo mkdir /data/web_static/releases/
 fi
 
 if ! [ -d '/data/web_static/shared/' ]; then
-    mkdir /data/web_static/shared/
+    sudo mkdir /data/web_static/shared/
 fi
 
 if ! [ -d '/data/web_static/releases/test/' ]; then
-    mkdir /data/web_static/releases/test/
+    sudo mkdir /data/web_static/releases/test/
 fi
 
 echo '<html><body>Test HTML File</body></html>' | sudo tee /data/web_static/releases/test/index.html > /dev/null
