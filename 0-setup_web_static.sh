@@ -28,9 +28,9 @@ if ! [ -d '/data/web_static/releases/test/' ]; then
     mkdir /data/web_static/releases/test/
 fi
 
-echo '<html><body>Test HTML File</body></html>' | sudo tee /data/web_static/releases/test/index.html > /dev/null
+echo '<html><body><h1>HBNB TESTING</h1></body></html>' | sudo tee /data/web_static/releases/test/index.html > /dev/null
 ln -s /data/web_static/releases/test/ /data/web_static/current
-sudo chown -R ubuntu:ubuntu /data/
+sudo chown -hR ubuntu:ubuntu /data/
 
 
 default_config="
