@@ -40,24 +40,26 @@ server {
 
         # Add custom header
         add_header X-Served-By \$hostname;
+        error_page 404 /custom_404.html;
 
-        root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
 
         server_name _;
 
         location / {
+                root /var/www/html/;
                 try_files \$uri \$uri/ =404;
                 rewrite ^/redirect_me(.*)\$ https://www.youtube.com/watch?v=70JD5YTemJc permanent;
         }
 
-        error_page 404 /custom_404.html;
         location = /custom_404.html {
+                root /var/www/error/;
                 internal;
         }
 
         location /hbnb_static/ {
-            alias /data/web_static/current/
+            alias /data/web_static/current/;
+            try_files \$uri \$uri/ =404;
         }
 }
 "
